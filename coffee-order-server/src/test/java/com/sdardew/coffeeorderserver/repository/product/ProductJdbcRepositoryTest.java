@@ -115,4 +115,12 @@ class ProductJdbcRepositoryTest {
     Optional<Product> found = repository.findByName(product2.getProductName());
     assertThat(found.isEmpty(), is(true));
   }
+
+  @Test
+  @DisplayName("카테고리를 통해 상품을 조회할 수 있다")
+  void testFindByCategory() {
+    repository.insert(product1);
+    List<Product> list = repository.findByCategory(Category.COFFEE_BEAN);
+    assertThat(list.isEmpty(), is(false));
+  }
 }
