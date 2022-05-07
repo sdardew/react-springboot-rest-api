@@ -10,4 +10,8 @@ public class JdbcUtils {
     var byteBuffer = ByteBuffer.wrap(bytes);
     return new UUID(byteBuffer.getLong(), byteBuffer.getLong());
   }
+
+  public static LocalDateTime toLocalDateTime(Timestamp timestamp) {
+    return timestamp != null ? timestamp.toLocalDateTime() : null;
+  }
 }
