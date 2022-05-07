@@ -75,12 +75,11 @@ class ProductJdbcRepositoryTest {
     List<Product> all = repository.findAll();
     assertThat(all.isEmpty(), is(false));
   }
-//
-//  @Test
-//  @DisplayName("상품을 추가할 수 있다")
-//  void testInsertException() {
-//    repository.insert(product1);
-//    assertThrows(DuplicateKeyException.class, () -> )
-//
-//  }
+
+  @Test
+  @DisplayName("중복된 상품은 추가할 수 있다")
+  void testInsertException() {
+    repository.insert(product1);
+    assertThrows(DuplicateKeyException.class, () -> repository.insert(product1));
+  }
 }
