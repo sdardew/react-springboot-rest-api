@@ -2,6 +2,7 @@ package com.sdardew.coffeeorderserver.repository.product;
 
 import com.sdardew.coffeeorderserver.model.Category;
 import com.sdardew.coffeeorderserver.model.Product;
+import com.sdardew.coffeeorderserver.repository.exception.DeleteException;
 import com.sdardew.coffeeorderserver.repository.exception.FailToInsertException;
 import com.sdardew.coffeeorderserver.repository.exception.FailToUpdateException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -82,6 +83,16 @@ public class ProductJdbcRepository implements ProductRepository {
       Collections.singletonMap("category", category.toString()),
       productRowMapper
     );
+  }
+
+  @Override
+  public void deleteById(UUID productId) {
+    try {
+      jdbcTemplate.update("DELETE FROM products WHERE product_id = UUID_TO_BIN(:productId)",
+        Collections.singletonMap("productId", productId.toString().getBytes()));
+    } catch (Exception e) {
+      throw new DeleteException("Fail To Delete From products table");
+    }
   }
 
   @Override

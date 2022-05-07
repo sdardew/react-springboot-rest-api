@@ -133,4 +133,13 @@ class ProductJdbcRepositoryTest {
     Optional<Product> product = repository.findById(product1.getProductId());
     assertThat(product.get().getPrice(), is(2000L));
   }
+
+  @Test
+  @DisplayName("id를 통해서 상품을 삭제할 수 있다")
+  void testDelete() {
+    repository.insert(product1);
+    repository.deleteById(product1.getProductId());
+    Optional<Product> product = repository.findById(product1.getProductId());
+    assertThat(product.isEmpty(), is(true));
+  }
 }
