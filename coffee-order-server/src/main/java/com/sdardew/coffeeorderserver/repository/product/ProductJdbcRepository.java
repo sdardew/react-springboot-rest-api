@@ -3,6 +3,7 @@ package com.sdardew.coffeeorderserver.repository.product;
 import com.sdardew.coffeeorderserver.model.Category;
 import com.sdardew.coffeeorderserver.model.Product;
 import com.sdardew.coffeeorderserver.repository.exception.FailToInsertException;
+import com.sdardew.coffeeorderserver.repository.exception.FailToUpdateException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -38,7 +39,14 @@ public class ProductJdbcRepository implements ProductRepository {
 
   @Override
   public Product update(Product product) {
-    return null;
+    var update = jdbcTemplate.update("UPDATE products SET product_name = :productName, category = :category, price = :price, description = :description, crated_at = :cratedAt, updated_at = :updatedAt" +
+        " WHERE product_id = UUID_TO_BIN(:productId)",
+      toParamMap(product)
+    );
+    if(update != 1) {
+      throw new FailToUpdateException("Fail To Update");
+    }
+    return product;
   }
 
   @Override

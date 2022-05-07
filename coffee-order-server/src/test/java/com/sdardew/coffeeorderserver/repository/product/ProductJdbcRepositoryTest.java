@@ -123,4 +123,14 @@ class ProductJdbcRepositoryTest {
     List<Product> list = repository.findByCategory(Category.COFFEE_BEAN);
     assertThat(list.isEmpty(), is(false));
   }
+
+  @Test
+  @DisplayName("상품의 정보를 업데이트할 수 있다")
+  void testUpdate() {
+    repository.insert(product1);
+    product1.setPrice(2000);
+    repository.update(product1);
+    Optional<Product> product = repository.findById(product1.getProductId());
+    assertThat(product.get().getPrice(), is(2000L));
+  }
 }
