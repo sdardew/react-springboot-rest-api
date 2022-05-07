@@ -8,6 +8,7 @@ import com.wix.mysql.config.Charset;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
@@ -52,6 +53,21 @@ class ProductJdbcRepositoryTest {
 
   private final Product product1 = new Product(UUID.randomUUID(), "new-product", Category.COFFEE_BEAN, 1000L);
 
+  @AfterEach
+  void afterEach() {
+    repository.deleteAll();
+  }
+
+  @Test
+  @Disabled
+  @DisplayName("모든 상품을 삭제할 수 있다")
+  void testDeleteAll() {
+    repository.insert(product1);
+    repository.deleteAll();
+    List<Product> all = repository.findAll();
+    assertThat(all.isEmpty(), is(true));
+  }
+
   @Test
   @DisplayName("상품을 추가할 수 있다")
   void testInsert() {
@@ -59,4 +75,12 @@ class ProductJdbcRepositoryTest {
     List<Product> all = repository.findAll();
     assertThat(all.isEmpty(), is(false));
   }
+//
+//  @Test
+//  @DisplayName("상품을 추가할 수 있다")
+//  void testInsertException() {
+//    repository.insert(product1);
+//    assertThrows(DuplicateKeyException.class, () -> )
+//
+//  }
 }
