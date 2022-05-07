@@ -2,7 +2,7 @@ package com.sdardew.coffeeorderserver.repository.product;
 
 import com.sdardew.coffeeorderserver.model.Category;
 import com.sdardew.coffeeorderserver.model.Product;
-import com.sdardew.coffeeorderserver.repository.exception.NothingInsertedException;
+import com.sdardew.coffeeorderserver.repository.exception.FailToInsertException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -30,7 +30,7 @@ public class ProductJdbcRepository implements ProductRepository {
     int update =  jdbcTemplate.update("INSERT INTO products(product_id, product_name, category, price, description, crated_at, updated_at)" +
       " VALUES (UUID_TO_BIN(:productId), :productName, :category, :price, :description, :cratedAt, :updatedAt)", toParamMap(product));
     if(update != 1) {
-      throw new NothingInsertedException();
+      throw new FailToInsertException();
     }
     return product;
   }
