@@ -12,6 +12,7 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import static com.wix.mysql.EmbeddedMysql.anEmbeddedMysql;
@@ -19,7 +20,7 @@ import static com.wix.mysql.config.MysqldConfig.aMysqldConfig;
 import static com.wix.mysql.distribution.Version.v8_0_11;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -51,7 +52,8 @@ class ProductJdbcRepositoryTest {
   @Autowired
   ProductRepository repository;
 
-  private final Product product1 = new Product(UUID.randomUUID(), "new-product", Category.COFFEE_BEAN, 1000L);
+  private static final Product product1 = new Product(UUID.randomUUID(), "product1", Category.COFFEE_BEAN, 1000L);
+  private static final Product product2 = new Product(UUID.randomUUID(), "product2", Category.SYRUP, 2000L);
 
   @AfterEach
   void afterEach() {
@@ -81,5 +83,21 @@ class ProductJdbcRepositoryTest {
   void testInsertException() {
     repository.insert(product1);
     assertThrows(DuplicateKeyException.class, () -> repository.insert(product1));
+  }
+
+  @Test
+  @DisplayName("상품의 id를 통해서 상품을 찾을 수 있다")
+  void testFindById() {
+    repository.insert(product1);
+    Optional<Product> found = repository.findById(product1.getProductId());
+    assertThat(found.isPresent(), is(true));
+  }
+
+  @Test
+  @DisplayName("존재하지 않는 id로는 상품을 조회할 수 없다")
+  void testFindByIdFail() {
+    repository.insert(product1);
+    Optional<Product> found = repository.findById(product2.getProductId());
+    assertThat(found.isEmpty(), is(true));
   }
 }

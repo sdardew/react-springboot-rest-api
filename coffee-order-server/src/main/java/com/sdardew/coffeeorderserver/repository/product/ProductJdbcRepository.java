@@ -3,6 +3,7 @@ package com.sdardew.coffeeorderserver.repository.product;
 import com.sdardew.coffeeorderserver.model.Category;
 import com.sdardew.coffeeorderserver.model.Product;
 import com.sdardew.coffeeorderserver.repository.exception.FailToInsertException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -42,7 +43,14 @@ public class ProductJdbcRepository implements ProductRepository {
 
   @Override
   public Optional<Product> findById(UUID productId) {
-    return Optional.empty();
+    try {
+      return Optional.of(
+        jdbcTemplate.queryForObject("SELECT * FROM products WHERE product_id = UUID_TO_BIN(:productId)",
+          Collections.singletonMap("productId", productId.toString().getBytes()), productRowMapper)
+      );
+    } catch (EmptyResultDataAccessException e) {
+      return Optional.empty();
+    }
   }
 
   @Override
