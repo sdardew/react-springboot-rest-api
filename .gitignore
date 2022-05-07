@@ -1,0 +1,5 @@
+# IntelliJ Setting
+*.idea
+
+# Mac OS File
+*.DS_Store
