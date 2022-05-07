@@ -9,7 +9,6 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DuplicateKeyException;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 import java.util.Optional;
@@ -98,6 +97,22 @@ class ProductJdbcRepositoryTest {
   void testFindByIdFail() {
     repository.insert(product1);
     Optional<Product> found = repository.findById(product2.getProductId());
+    assertThat(found.isEmpty(), is(true));
+  }
+
+  @Test
+  @DisplayName("상품명으로 상품을 조회할 수 있다")
+  void testFindByName() {
+    repository.insert(product1);
+    Optional<Product> found = repository.findByName(product1.getProductName());
+    assertThat(found.isPresent(), is(true));
+  }
+
+  @Test
+  @DisplayName("존재하지 않는 상품명으로 상품을 조회할 수 없다")
+  void testFindByNameFail() {
+    repository.insert(product1);
+    Optional<Product> found = repository.findByName(product2.getProductName());
     assertThat(found.isEmpty(), is(true));
   }
 }
