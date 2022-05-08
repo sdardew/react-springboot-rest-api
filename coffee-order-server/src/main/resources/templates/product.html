@@ -11,7 +11,7 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
           crossorigin="anonymous">
 
-    <title>Grids & Circles</title>
+    <title>Product Information</title>
 </head>
 <body class="container-fluid">
 
@@ -19,15 +19,49 @@
 
 <hr />
 
-<form id="update-form" th:action="@{/update-voucher}" method="post">
+<form id="update-form" th:action="@{/update-product}" method="post">
     <div class="form-group">
         <label for="productId">Product Id</label>
         <input type="text" readonly class="form-control" id="productId" name="productId" th:value="${product.productId}" />
     </div>
 
+    <div class="mb-3">
+        <label for="productName" class="form-label">Name</label>
+        <input type="text" class="form-control" id="productName" name="productName"  th:value="${product.productName}" />
+    </div>
+
+    <div class="mb-3">
+        <label for="category" class="form-label">Category</label>
+        <select id="category" name="category" class="form-select">
+            <option value="COFFEE_BEAN" th:selected="${product.category.toString()}=='COFFEE_BEAN'">COFFEE BEAN</option>
+            <option value="SYRUP" th:selected="${product.category.toString()}=='SYRUP'">SYRUP</option>
+            <option value="POWDER" th:selected="${product.category.toString()}=='POWDER'">POWDER</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="price" class="form-label">Price</label>
+        <input type="number" class="form-control" id="price" name="price" th:value="${product.price}" />
+    </div>
+
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea class="form-control" id="description" name="description" rows="3" th:text="${product.description}"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label for="createdAt">Created At</label>
+        <input type="text" readonly class="form-control" id="createdAt" name="createdAt" th:value="${product.createdAt}" />
+    </div>
 </form>
 <hr />
-<button type="submit" form="update-form" class="btn btn-primary">Submit</button>
+<a class="btn btn-success" th:href="@{/}">Go Home</a>
+<button type="submit" form="update-form" class="btn btn-primary">Update</button>
+<button type="submit" form="delete-form" class="btn btn-danger">Delete</button>
+
+<form id="delete-form" th:action="@{/delete-product}" method="post">
+    <input name="productId" readonly hidden th:value="${product.productId}" />
+</form>
 
 </body>
 </html>

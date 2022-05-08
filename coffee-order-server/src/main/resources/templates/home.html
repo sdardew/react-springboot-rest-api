@@ -11,9 +11,40 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
           crossorigin="anonymous">
 
-    <title>Grids & Circles</title>
+    <title>Product Home</title>
 </head>
 <body class="container-fluid">
-    <h1>Homepage</h1>
+<h1>Product Home</h1>
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <a th:href="@{/new-product}" class="btn btn-primary me-md-2" type="button">Add Product</a>
+</div>
+<hr />
+<table class="table table-hover">
+    <thead class="table-dark">
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Category</th>
+        <th scope="col">Price</th>
+        <th scope="col">Description</th>
+        <th scope="col">Crated at</th>
+        <th scope="col">Updated at</th>
+        <th scope="col">Update</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product: ${products}" th:object="${product}">
+        <td th:text="*{productId}"></td>
+        <td th:text="*{productName}"></td>
+        <td th:text="*{category}"></td>
+        <td th:text="*{price}"></td>
+        <td th:text="*{description}"></td>
+        <td th:text="*{createdAt}"></td>
+        <td th:text="*{updatedAt}"></td>
+        <td><a type="button" class="btn btn-secondary" th:href="@{/product} + '?id=' + *{productId}">Update</a></td>
+    </tr>
+    </tbody>
+</table>
+
 </body>
 </html>

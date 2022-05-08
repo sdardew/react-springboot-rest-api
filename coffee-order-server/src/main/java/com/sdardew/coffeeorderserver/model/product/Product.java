@@ -4,12 +4,12 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class Product {
-  private final UUID productId;
+  private UUID productId;
   private String productName;
   private Category category;
   private long price;
   private String description;
-  private final LocalDateTime cratedAt;
+  private LocalDateTime createdAt;
   private LocalDateTime updatedAt;
 
   public Product(UUID productId, String productName, Category category, long price) {
@@ -17,17 +17,17 @@ public class Product {
     this.productName = productName;
     this.category = category;
     this.price = price;
-    this.cratedAt = LocalDateTime.now();
+    this.createdAt = LocalDateTime.now();
     this.updatedAt = LocalDateTime.now();
   }
 
-  public Product(UUID productId, String productName, Category category, long price, String description, LocalDateTime cratedAt, LocalDateTime updatedAt) {
+  public Product(UUID productId, String productName, Category category, long price, String description, LocalDateTime createdAt, LocalDateTime updatedAt) {
     this.productId = productId;
     this.productName = productName;
     this.category = category;
     this.price = price;
     this.description = description;
-    this.cratedAt = cratedAt;
+    this.createdAt = createdAt;
     this.updatedAt = updatedAt;
   }
 
@@ -51,8 +51,8 @@ public class Product {
     return description;
   }
 
-  public LocalDateTime getCratedAt() {
-    return cratedAt;
+  public LocalDateTime getCreatedAt() {
+    return createdAt;
   }
 
   public LocalDateTime getUpdatedAt() {
