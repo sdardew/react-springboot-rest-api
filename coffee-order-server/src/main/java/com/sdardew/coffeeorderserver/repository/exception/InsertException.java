@@ -1,7 +1,7 @@
 package com.sdardew.coffeeorderserver.repository.exception;
 
-public class FailToInsertException extends RuntimeException {
-  public FailToInsertException() {
+public class InsertException extends RuntimeException {
+  public InsertException() {
     super("Failed To Insert To DB");
   }
 }
