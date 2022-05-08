@@ -1,7 +1,7 @@
 package com.sdardew.coffeeorderserver.repository.product;
 
-import com.sdardew.coffeeorderserver.model.Category;
-import com.sdardew.coffeeorderserver.model.Product;
+import com.sdardew.coffeeorderserver.model.product.Category;
+import com.sdardew.coffeeorderserver.model.product.Product;
 import com.wix.mysql.EmbeddedMysql;
 import com.wix.mysql.ScriptResolver;
 import com.wix.mysql.config.Charset;

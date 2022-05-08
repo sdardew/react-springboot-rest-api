@@ -1,8 +1,8 @@
 package com.sdardew.coffeeorderserver.repository.product;
 
-import com.sdardew.coffeeorderserver.controller.UpdateProduct;
-import com.sdardew.coffeeorderserver.model.Category;
-import com.sdardew.coffeeorderserver.model.Product;
+import com.sdardew.coffeeorderserver.model.product.UpdateProduct;
+import com.sdardew.coffeeorderserver.model.product.Category;
+import com.sdardew.coffeeorderserver.model.product.Product;
 import com.sdardew.coffeeorderserver.repository.exception.DeleteException;
 import com.sdardew.coffeeorderserver.repository.exception.FailToInsertException;
 import com.sdardew.coffeeorderserver.repository.exception.FailToUpdateException;

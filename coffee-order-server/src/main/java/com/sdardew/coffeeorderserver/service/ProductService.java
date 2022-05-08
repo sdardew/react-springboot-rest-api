@@ -1,8 +1,8 @@
 package com.sdardew.coffeeorderserver.service;
 
-import com.sdardew.coffeeorderserver.controller.UpdateProduct;
-import com.sdardew.coffeeorderserver.model.Category;
-import com.sdardew.coffeeorderserver.model.Product;
+import com.sdardew.coffeeorderserver.model.product.UpdateProduct;
+import com.sdardew.coffeeorderserver.model.product.Category;
+import com.sdardew.coffeeorderserver.model.product.Product;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,9 +15,7 @@ public interface ProductService {
 
   List<Product> getAllProducts();
 
-  void deleteProduct();
-
-  Product createProduct(String productName, Category category, long price);
+  void deleteProduct(UUID productId);
 
   Product createProduct(String productName, Category category, long price, String desription);
 

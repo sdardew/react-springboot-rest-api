@@ -1,10 +1,9 @@
 package com.sdardew.coffeeorderserver.service;
 
-import com.sdardew.coffeeorderserver.controller.UpdateProduct;
-import com.sdardew.coffeeorderserver.model.Category;
-import com.sdardew.coffeeorderserver.model.Product;
+import com.sdardew.coffeeorderserver.model.product.UpdateProduct;
+import com.sdardew.coffeeorderserver.model.product.Category;
+import com.sdardew.coffeeorderserver.model.product.Product;
 import com.sdardew.coffeeorderserver.repository.product.ProductRepository;
-import org.apache.tomcat.jni.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -27,7 +26,7 @@ public class ProductServiceImpl implements ProductService {
 
   @Override
   public List<Product> getProductsByCategory(Category category) {
-    return null;
+    return productRepository.findByCategory(category);
   }
 
   @Override
@@ -36,13 +35,8 @@ public class ProductServiceImpl implements ProductService {
   }
 
   @Override
-  public void deleteProduct() {
-
-  }
-
-  @Override
-  public Product createProduct(String productName, Category category, long price) {
-    return null;
+  public void deleteProduct(UUID productId) {
+    productRepository.deleteById(productId);
   }
 
   @Override

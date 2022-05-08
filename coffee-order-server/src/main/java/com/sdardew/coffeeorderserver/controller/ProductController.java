@@ -1,6 +1,8 @@
 package com.sdardew.coffeeorderserver.controller;
 
-import com.sdardew.coffeeorderserver.model.Product;
+import com.sdardew.coffeeorderserver.model.product.NewProduct;
+import com.sdardew.coffeeorderserver.model.product.Product;
+import com.sdardew.coffeeorderserver.model.product.UpdateProduct;
 import com.sdardew.coffeeorderserver.service.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,6 +58,12 @@ public class ProductController {
   @PostMapping("/update-product")
   public String updateProduct(UpdateProduct updateProduct) {
     productService.updateProduct(updateProduct);
+    return "redirect:/";
+  }
+
+  @PostMapping("/delete-product")
+  public String deleteProduct(@RequestParam("productId") UUID productId) {
+    productService.deleteProduct(productId);
     return "redirect:/";
   }
 }
