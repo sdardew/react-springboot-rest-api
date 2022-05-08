@@ -4,8 +4,8 @@ import com.sdardew.coffeeorderserver.model.product.UpdateProduct;
 import com.sdardew.coffeeorderserver.model.product.Category;
 import com.sdardew.coffeeorderserver.model.product.Product;
 import com.sdardew.coffeeorderserver.repository.exception.DeleteException;
-import com.sdardew.coffeeorderserver.repository.exception.FailToInsertException;
-import com.sdardew.coffeeorderserver.repository.exception.FailToUpdateException;
+import com.sdardew.coffeeorderserver.repository.exception.InsertException;
+import com.sdardew.coffeeorderserver.repository.exception.UpdateException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -34,7 +34,7 @@ public class ProductJdbcRepository implements ProductRepository {
     int update =  jdbcTemplate.update("INSERT INTO products(product_id, product_name, category, price, description, created_at, updated_at)" +
       " VALUES (UUID_TO_BIN(:productId), :productName, :category, :price, :description, :createdAt, :updatedAt)", toParamMap(product));
     if(update != 1) {
-      throw new FailToInsertException();
+      throw new InsertException();
     }
     return product;
   }
@@ -46,7 +46,7 @@ public class ProductJdbcRepository implements ProductRepository {
       toParamMap(product)
     );
     if(update != 1) {
-      throw new FailToUpdateException("Fail To Update");
+      throw new UpdateException("Fail To Update");
     }
     return product;
   }
@@ -58,7 +58,7 @@ public class ProductJdbcRepository implements ProductRepository {
       toParamMap(product)
     );
     if(update != 1) {
-      throw new FailToUpdateException("Fail To Update");
+      throw new UpdateException("Fail To Update");
     }
     return product;
   }
