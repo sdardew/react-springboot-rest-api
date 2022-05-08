@@ -5,6 +5,7 @@ import com.sdardew.coffeeorderserver.model.Product;
 import com.sdardew.coffeeorderserver.repository.product.ProductRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -19,7 +20,7 @@ public class ProductServiceImpl implements ProductService {
 
   @Override
   public Optional<Product> getProductById(UUID productId) {
-    return Optional.empty();
+    return productRepository.findById(productId);
   }
 
   @Override
@@ -29,7 +30,7 @@ public class ProductServiceImpl implements ProductService {
 
   @Override
   public List<Product> getAllProducts() {
-    return null;
+    return productRepository.findAll();
   }
 
   @Override
@@ -44,6 +45,7 @@ public class ProductServiceImpl implements ProductService {
 
   @Override
   public Product createProduct(String productName, Category category, long price, String desription) {
-    return null;
+    Product product = new Product(UUID.randomUUID(), productName, category, price, desription, LocalDateTime.now(), LocalDateTime.now());
+    return productRepository.insert(product);
   }
 }
