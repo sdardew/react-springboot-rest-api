@@ -3,6 +3,7 @@ package com.sdardew.coffeeorderserver.controller.api;
 import com.sdardew.coffeeorderserver.model.product.Product;
 import com.sdardew.coffeeorderserver.service.ProductService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,5 +30,10 @@ public class ProductRestController {
   public ResponseEntity<Product> getProductByProductId(@PathVariable UUID productId) {
     Optional<Product> product = productService.getProductById(productId);
     return ResponseEntity.of(product);
+  }
+
+  @DeleteMapping("/api/product/{productId}")
+  public void deleteProductByProductId(@PathVariable UUID productId) {
+    productService.deleteProduct(productId);
   }
 }
