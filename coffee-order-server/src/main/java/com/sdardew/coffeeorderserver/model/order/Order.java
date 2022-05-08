@@ -1,4 +1,4 @@
-package com.sdardew.coffeeorderserver.model;
+package com.sdardew.coffeeorderserver.model.order;
 
 import java.time.LocalDateTime;
 import java.util.List;

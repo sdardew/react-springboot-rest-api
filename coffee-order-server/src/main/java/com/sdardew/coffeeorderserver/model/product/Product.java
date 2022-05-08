@@ -1,4 +1,4 @@
-package com.sdardew.coffeeorderserver.model;
+package com.sdardew.coffeeorderserver.model.product;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

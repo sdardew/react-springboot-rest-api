@@ -1,4 +1,4 @@
-package com.sdardew.coffeeorderserver.model;
+package com.sdardew.coffeeorderserver.model.product;
 
 public enum Category {
   COFFEE_BEAN,

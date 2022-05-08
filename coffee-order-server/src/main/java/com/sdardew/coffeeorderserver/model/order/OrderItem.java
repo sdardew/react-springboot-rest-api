@@ -1,4 +1,6 @@
-package com.sdardew.coffeeorderserver.model;
+package com.sdardew.coffeeorderserver.model.order;
+
+import com.sdardew.coffeeorderserver.model.product.Category;
 
 import java.util.UUID;
 
