@@ -1,4 +1,4 @@
-package com.sdardew.coffeeorderserver.repository;
+package com.sdardew.coffeeorderserver.repository.utility;
 
 import java.nio.ByteBuffer;
 import java.sql.Timestamp;

@@ -13,8 +13,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
-import static com.sdardew.coffeeorderserver.repository.JdbcUtils.toLocalDateTime;
-import static com.sdardew.coffeeorderserver.repository.JdbcUtils.toUUID;
+import static com.sdardew.coffeeorderserver.repository.utility.JdbcUtils.toLocalDateTime;
+import static com.sdardew.coffeeorderserver.repository.utility.JdbcUtils.toUUID;
 
 @Repository
 public class ProductJdbcRepository implements ProductRepository {
