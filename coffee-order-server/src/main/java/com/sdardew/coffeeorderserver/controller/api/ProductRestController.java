@@ -1,7 +1,7 @@
 package com.sdardew.coffeeorderserver.controller.api;
 
 import com.sdardew.coffeeorderserver.model.product.Product;
-import com.sdardew.coffeeorderserver.service.ProductService;
+import com.sdardew.coffeeorderserver.service.product.ProductService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

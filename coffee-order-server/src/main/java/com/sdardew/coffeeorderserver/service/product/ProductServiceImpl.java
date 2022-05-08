@@ -1,4 +1,4 @@
-package com.sdardew.coffeeorderserver.service;
+package com.sdardew.coffeeorderserver.service.product;
 
 import com.sdardew.coffeeorderserver.model.product.UpdateProduct;
 import com.sdardew.coffeeorderserver.model.product.Category;

@@ -3,7 +3,7 @@ package com.sdardew.coffeeorderserver.controller;
 import com.sdardew.coffeeorderserver.model.product.NewProduct;
 import com.sdardew.coffeeorderserver.model.product.Product;
 import com.sdardew.coffeeorderserver.model.product.UpdateProduct;
-import com.sdardew.coffeeorderserver.service.ProductService;
+import com.sdardew.coffeeorderserver.service.product.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
