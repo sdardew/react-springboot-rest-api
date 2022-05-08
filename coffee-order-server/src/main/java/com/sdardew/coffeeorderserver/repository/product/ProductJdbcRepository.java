@@ -1,5 +1,6 @@
 package com.sdardew.coffeeorderserver.repository.product;
 
+import com.sdardew.coffeeorderserver.controller.UpdateProduct;
 import com.sdardew.coffeeorderserver.model.Category;
 import com.sdardew.coffeeorderserver.model.Product;
 import com.sdardew.coffeeorderserver.repository.exception.DeleteException;
@@ -30,8 +31,8 @@ public class ProductJdbcRepository implements ProductRepository {
 
   @Override
   public Product insert(Product product) {
-    int update =  jdbcTemplate.update("INSERT INTO products(product_id, product_name, category, price, description, crated_at, updated_at)" +
-      " VALUES (UUID_TO_BIN(:productId), :productName, :category, :price, :description, :cratedAt, :updatedAt)", toParamMap(product));
+    int update =  jdbcTemplate.update("INSERT INTO products(product_id, product_name, category, price, description, created_at, updated_at)" +
+      " VALUES (UUID_TO_BIN(:productId), :productName, :category, :price, :description, :createdAt, :updatedAt)", toParamMap(product));
     if(update != 1) {
       throw new FailToInsertException();
     }
@@ -40,7 +41,19 @@ public class ProductJdbcRepository implements ProductRepository {
 
   @Override
   public Product update(Product product) {
-    var update = jdbcTemplate.update("UPDATE products SET product_name = :productName, category = :category, price = :price, description = :description, crated_at = :cratedAt, updated_at = :updatedAt" +
+    var update = jdbcTemplate.update("UPDATE products SET product_name = :productName, category = :category, price = :price, description = :description, created_at = :createdAt, updated_at = :updatedAt" +
+        " WHERE product_id = UUID_TO_BIN(:productId)",
+      toParamMap(product)
+    );
+    if(update != 1) {
+      throw new FailToUpdateException("Fail To Update");
+    }
+    return product;
+  }
+
+  @Override
+  public UpdateProduct update(UpdateProduct product) {
+    var update = jdbcTemplate.update("UPDATE products SET product_name = :productName, category = :category, price = :price, description = :description, updated_at = :updatedAt" +
         " WHERE product_id = UUID_TO_BIN(:productId)",
       toParamMap(product)
     );
@@ -106,9 +119,9 @@ public class ProductJdbcRepository implements ProductRepository {
     var category = Category.valueOf(resultSet.getString("category"));
     var price = resultSet.getLong("price");
     var description = resultSet.getString("description");
-    var cratedAt = toLocalDateTime(resultSet.getTimestamp("crated_at"));
+    var createdAt = toLocalDateTime(resultSet.getTimestamp("created_at"));
     var updatedAt = toLocalDateTime(resultSet.getTimestamp("updated_at"));
-    return new Product(productId, productName, category, price, description, cratedAt, updatedAt);
+    return new Product(productId, productName, category, price, description, createdAt, updatedAt);
   };
 
   private Map<String, Object> toParamMap(Product product) {
@@ -118,7 +131,18 @@ public class ProductJdbcRepository implements ProductRepository {
     paramMap.put("category", product.getCategory().toString());
     paramMap.put("price", product.getPrice());
     paramMap.put("description", product.getDescription());
-    paramMap.put("cratedAt", product.getCratedAt());
+    paramMap.put("createdAt", product.getCreatedAt());
+    paramMap.put("updatedAt", product.getUpdatedAt());
+    return paramMap;
+  }
+
+  private Map<String, Object> toParamMap(UpdateProduct product) {
+    var paramMap = new HashMap<String, Object>();
+    paramMap.put("productId", product.getProductId().toString().getBytes());
+    paramMap.put("productName", product.getProductName());
+    paramMap.put("category", product.getCategory().toString());
+    paramMap.put("price", product.getPrice());
+    paramMap.put("description", product.getDescription());
     paramMap.put("updatedAt", product.getUpdatedAt());
     return paramMap;
   }

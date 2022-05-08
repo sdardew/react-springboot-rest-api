@@ -1,5 +1,6 @@
 package com.sdardew.coffeeorderserver.service;
 
+import com.sdardew.coffeeorderserver.controller.UpdateProduct;
 import com.sdardew.coffeeorderserver.model.Category;
 import com.sdardew.coffeeorderserver.model.Product;
 
@@ -19,4 +20,6 @@ public interface ProductService {
   Product createProduct(String productName, Category category, long price);
 
   Product createProduct(String productName, Category category, long price, String desription);
+
+  UpdateProduct updateProduct(UpdateProduct updateProduct);
 }

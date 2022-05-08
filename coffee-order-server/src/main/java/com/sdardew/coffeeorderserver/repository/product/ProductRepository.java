@@ -1,5 +1,6 @@
 package com.sdardew.coffeeorderserver.repository.product;
 
+import com.sdardew.coffeeorderserver.controller.UpdateProduct;
 import com.sdardew.coffeeorderserver.model.Category;
 import com.sdardew.coffeeorderserver.model.Product;
 
@@ -13,6 +14,8 @@ public interface ProductRepository {
   Product insert(Product product);
 
   Product update(Product product);
+
+  UpdateProduct update(UpdateProduct product);
 
   Optional<Product> findById(UUID productId);
 

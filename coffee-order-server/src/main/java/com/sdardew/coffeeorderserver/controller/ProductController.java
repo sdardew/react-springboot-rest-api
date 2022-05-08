@@ -38,7 +38,6 @@ public class ProductController {
     return "redirect:/";
   }
 
-
   @GetMapping("/new-product")
   public String newProduct() {
     return "new-product";
@@ -51,6 +50,12 @@ public class ProductController {
       newProduct.getCategory(),
       newProduct.getPrice(),
       newProduct.getDescription());
+    return "redirect:/";
+  }
+
+  @PostMapping("/update-product")
+  public String updateProduct(UpdateProduct updateProduct) {
+    productService.updateProduct(updateProduct);
     return "redirect:/";
   }
 }
